@@ -102,7 +102,7 @@ const DetailedMovie = () => {
                 overview: json.overview,
                 release_date: json.release_date,
                 runtime: json.runtime,
-                vote_average : json.vote_average,
+                vote_average : json.vote_average.toFixed(1),
                 genres: json.genres.map(({name}) => {return {name:name}}),}
                 let count = 0;
                 genreString = '';

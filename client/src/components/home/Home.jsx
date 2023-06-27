@@ -17,7 +17,7 @@ const ListHeading = styled(Box)`
 
 
 const Home  = () => {
-
+    
     return (
         <>
         <Banner/>

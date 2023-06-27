@@ -3,100 +3,11 @@ import { Box, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
 import fetch from "node-fetch";
 import { Link } from "react-router-dom";
-let trendingMovies = [];
-const moviesTemp = [
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
-    {
-        imageSrc : 'https://www.themoviedb.org/t/p/w220_and_h330_face/3rINdUPSy9AklJg74jWHOyUXuZd.jpg',
-        movieName : 'Lord Of Rings',
-        releaseDate : '10th jan',
-        rating : '87%'
-    },
+import { useContext } from "react";
+import { DataContext } from "../../../context/DataProvider";
 
-]
+let trendingMovies = [];
+
 
 
 
@@ -105,8 +16,10 @@ const moviesTemp = [
 
 
 const MovieList = (props) => {
-    console.log('end')
-    const [movies, setMovies] = useState(moviesTemp);
+    
+    const {account}=useContext(DataContext);
+    const [movies, setMovies] = useState(trendingMovies);
+    console.log(account)
     let url = '';
     
     if(props.data === 'trending'){
@@ -145,9 +58,9 @@ const MovieList = (props) => {
             >
         {
             movies && movies.length > 0 ? movies.map(movie => (
-                <Link to={`/movie/${movie.id}`} style={{textDecoration:'none' , color:'inherit'}}>
+               
                         <MovieItem  movie = {movie}/>
-                 </Link>
+                
     ))
     :
             <Box style={{ color:'#878787', margin:'30px 80px', fontSize:18 }}>No data available to display</Box>

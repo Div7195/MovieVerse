@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box,Typography,styled } from '@mui/material';
-
+import { useState } from 'react';
 
 
 const Container=styled(Box)`
@@ -71,7 +71,10 @@ const SearchButton = styled('input')({
     color: "#fff"
 })
 const Banner = () => {
-
+    const [search, setSearch] = useState('');
+    const onInputChange = (e) => {
+        setSearch(e.target.value);
+    }
   return (
     <Container>
         <Heading variant='h2'>Welcome.</Heading>
@@ -79,9 +82,9 @@ const Banner = () => {
         <SearchParent >
             <SearchForm id='search-box' action='/search' method='get' acceptCharset='utf-8'>
                 <label cursor = 'default' >
-                    <SearchInput  id="inner_search_v4" name="query"  placeholder="Search for a movie, genre, etc...." />
+                    <SearchInput  id="inner_search_v4" name="query"  placeholder="Search for a movie, genre, etc...." onChange={(e) => {onInputChange(e)}} value = {search}/>
                 </label>
-                <SearchButton type="submit" value="Search"></SearchButton>
+                <SearchButton type="submit" value="Search" style={{cursor:'pointer'}}></SearchButton>
             </SearchForm>
         </SearchParent>
     </Container>

@@ -1,7 +1,8 @@
 import User from "../model/user-schema.js";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv'
-import token from "../model/token-schema.js";
+import jwt from 'jsonwebtoken'
+import token from '../model/token-schema.js'
 dotenv.config();
 export const signupUserController = async(request, response) => {
     try {
@@ -28,7 +29,7 @@ export const loginUserController = async(request, response) => {
              const refershToken = jwt.sign(user.toJSON(), process.env.REFRESH_SECRET_KEY);
              const newToken = new token({token:refershToken});
              await newToken.save();
-             return response.status(200).json({accessToken : accessToken, refershToken : refershToken, username : user.username});
+             return response.status(200).json({accessToken : accessToken, refershToken : refershToken, username : user.username, mongoId:user._id});
         }else{
             return response.status(400).json({msg:'Password does not match'});
         }
@@ -36,3 +37,63 @@ export const loginUserController = async(request, response) => {
         return response.status(500).json({msg:'Error while login user'});
     }
 }
+
+export const addWatchLaterController = async(request, response) => {
+    
+    try {
+        let userId = request.body.userId;
+        let movieId = request.body.movieId;
+
+        await User.findOneAndUpdate(
+            { _id: userId },
+            { $push: { watchlater: movieId  } }
+        );
+        return response.status(200).json({msg:"Added to watch later successfully"});
+            
+    } catch (error) {
+        return response.status(500).json({msg:'error while adding to watchlater'});
+    }
+}
+export const addToFavoriteController = async(request, response) => {
+    try {
+        let userId = request.body.userId;
+        let movieId = request.body.movieId;
+        await User.findOneAndUpdate(
+            { _id: userId },
+            { $push: { favorite: movieId  } }
+        );
+        
+        return response.status(200).json({msg:"Added to favorite successfully"});
+            
+    } catch (error) {
+        return response.status(500).json({msg:'error while adding to favorite'});
+    }
+}
+export const getWatchLaterController = async(request, response) => {
+    let userId = request.query.userId;
+    let user = await User.findOne({ _id : userId});
+    try {
+        let movieIds = [];
+        for(let i = 0;i<user.watchlater.length;i++){
+            movieIds.push(user.watchlater[i]);
+        }
+        return response.status(200).json(movieIds);    
+    } catch (error) {
+        return response.status(500).json({msg:'error while getting watchlater'});
+    }
+}
+export const getFavoriteController = async(request, response) => {
+    let userId = request.query.userId;
+    let user = await User.findOne({ _id : userId});
+    try {
+        let movieIds = [];
+        for(let i = 0;i<user.favorite.length;i++){
+            movieIds.push(user.favorite[i]);
+        }
+        
+        return response.status(200).json(movieIds);    
+    } catch (error) {
+        return response.status(500).json({msg:'error while getting favorite'});
+    }
+}
+

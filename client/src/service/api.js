@@ -1,7 +1,16 @@
-import axios from 'axios';
-import { API_NOTIFICATION_MESSAGES, SERVICE_URLS } from '../constants/config';
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///REFER TO OFFICIAL AXIOS DOCUMENTATION FOR THE USAGE OF THE FUNCTIONS DEFINED BELOW
+//https://axios-http.com/
+///////////////////////////////////////////////////////////////////////////////////////
+//THE DATA OF THE REQUEST WILL COME IN BODY FIELD OF REQUEST AND THE DATA CONTAINED IN RESPONSE WILL COME IN DATA OF RESPONSE
 
-const API_URL = 'https://localhost:8000';
+
+
+import axios from 'axios'
+import { API_NOTIFICATION_MESSAGES,SERVICE_URLS } from '../constants/config';
+import { getAccessToken ,getType } from '../utils/common-utils.js';
+const API_URL='http://localhost:8000';
+
 const axiosInstance=axios.create({
     baseURL:API_URL,
     timeout:10000,
@@ -37,7 +46,10 @@ axiosInstance.interceptors.response.use(  //for this refer doc of https://axios-
         return Promise.reject(processError(error))
     }
 )
-
+/////////////////////////////
+//If Success -> return { isSuccess : true , data : Object }
+//If Fail -> return { isFailure : true , status : String , msg: String , code: int}
+/////////////////////////////
 const processResponse=(response)=>{
     if(response?.status === 200) {
         return { isSuccess : true , data : response.data }
@@ -91,10 +103,10 @@ for(const [key,value] of Object.entries(SERVICE_URLS)){
         url:value.url,
         data: value.method==='DELETE' ? {}: body,
         responseType:value.responseType,
-        // headers : {
-        //     authorization : getAccessToken()
-        // },
-        // TYPE: getType(value, body),
+        headers : {
+            authorization : getAccessToken()
+        },
+        TYPE: getType(value, body),
 
         onUploadProgress: function(progressEvent) {
             if(showUploadProgress){

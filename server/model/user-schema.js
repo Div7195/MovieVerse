@@ -8,6 +8,14 @@ const userSchema = mongoose.Schema({
     password :{
         type:String,
         required:true
+    },
+    favorite :{
+        type:[String],
+        required:false
+    },
+    watchlater:{
+        type:[String],
+        required:false
     }
 })
 

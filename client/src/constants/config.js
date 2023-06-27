@@ -29,5 +29,24 @@ export const SERVICE_URLS={
     userLogin:{
         url:'/login',
         method:'POST'
+    },
+    addWatchLater:{
+        url:'/addwatchlater',
+        method:'PUT'
+    },
+    markFavorite:{
+        url:'/markfavorite',
+        method:'PUT'
+    },
+    getWatchLater:{
+        url:'/getwatchlater',
+        method:'GET',
+        params : true,
+        
+    },
+    getFavorite:{
+        url:'/getfavorite',
+        method:'GET',
+        params : true,
     }
 }

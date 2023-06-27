@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState ,useContext} from 'react'
 import {Box,Button,TextField,styled,Typography} from '@mui/material'
-import { API } from '../../service/api'
+import { API } from '../../service/api.js'
 import { DataContext } from '../../context/DataProvider'
 import { useNavigate } from 'react-router-dom'
 const Component  = styled(Box)`
@@ -85,6 +85,7 @@ const Login = ()=>{
     }
     const onValueChange = (e) => {
         setLogin({...login, [e.target.name] : e.target.value});
+        console.log(login)
     }
     const signupUser = async() =>{
        let response =  await API.userSignup(signup);
@@ -102,8 +103,9 @@ const Login = ()=>{
 
             sessionStorage.setItem('accessToken', `Bearer ${response.data.accessToken}`);
             sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken}`);
-
-            setAccount({username : response.data.username});
+            
+            setAccount({username : response.data.username, loggedIn:true, id:response.data.mongoId});
+            
             navigate('/');
         }else{
             setError('Something went wrong, please try again later');

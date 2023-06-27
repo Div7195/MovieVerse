@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, styled, Box } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
-
-
+import { DataContext } from "../../context/DataProvider";
+import { useContext } from "react";
 
 const HeaderBox = styled(AppBar)`
     background : rgb(3,37,65);
@@ -33,14 +33,21 @@ const NavRightContent = styled(Typography)`
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const {account}=useContext(DataContext);
+    console.log(account)
     return (
         <HeaderBox>
             <Toolbar>
                 <AppTitle onClick={() => { if(location.pathname !== '/') navigate('/')}} style = {{cursor :'pointer'}}>MovieVerse</AppTitle>
                 <NavRight>
                 <NavRightContent onClick={() => { if(location.pathname.includes('explore') === false) navigate('/explore')}} style={{cursor:'pointer'}} >Explore</NavRightContent>
-                <NavRightContent >Login</NavRightContent>
-                <NavRightContent >Search</NavRightContent>
+                {
+                    account && account.loggedIn === true ? <NavRightContent onClick={() => { if(location.pathname.includes('library') === false) navigate('/library')}} style = {{cursor :'pointer'}} >Library</NavRightContent>
+                    :
+                    <NavRightContent onClick={() => { if(location.pathname.includes('login') === false) navigate('/login')}} style = {{cursor :'pointer'}} >Login</NavRightContent>
+                }
+                
+                <NavRightContent onClick={() => { if(location.pathname.includes('search') === false) navigate('/search?query=')}} style = {{cursor :'pointer'}}>Search</NavRightContent>
                 </NavRight>
             </Toolbar>
         </HeaderBox>

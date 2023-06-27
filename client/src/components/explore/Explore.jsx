@@ -138,9 +138,9 @@ const Explore = () => {
         {
             movies && movies.length > 0 ? movies.map(movie => (
                 <Grid item lg={2} sm={3} xs={12}>
-                    <Link to={`/movie/${movie.id}`} style={{textDecoration:'none' , color:'inherit'}}>
+                    
                         <MovieItem  movie = {movie}/>
-                 </Link>
+                 
                 </Grid>
             ))
             :
