@@ -1,6 +1,6 @@
-## MovieVerse
+# MovieVerse
  A web app through which user can see details of various movies.
-# Main features:
+## Main features:
 - Sort movies by popularity, top rated, upcoming etc.
 - Sort movies by genre
 - See detailed description about any movie including cast, videos, trailers, reviews, etc.
