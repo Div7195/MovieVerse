@@ -4,6 +4,7 @@
 - Sort movies by popularity, top rated, upcoming etc.
 - Sort movies by genre
 - See detailed description about any movie including cast, videos, trailers, reviews, etc.
+- Authentication
 - Search any movies by keywords
 - Add to watchlist
 - Mark any movie as favorite
