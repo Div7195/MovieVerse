@@ -5,15 +5,10 @@ import { useContext } from "react";
 
 const HeaderBox = styled(AppBar)`
     background : rgb(3,37,65);
-    display:flex;
-    flex-wrap:wrap;
-    flex-direction:row;
-    align-items:center;
 `
 const AppTitle = styled(Typography)`
     font-size: 45px;
     margin-left: 60px;
-    display:inline-block;
     background: rgb(202,245,126);
     font-family: 'Belanosima', sans-serif;
     background: linear-gradient(90deg, rgba(202,245,126,1) 0%, rgba(116,250,162,1) 34%, rgba(5,255,198,1) 55%, rgba(0,237,255,1) 74%);
@@ -42,9 +37,8 @@ const Header = () => {
     console.log(account)
     return (
         <HeaderBox>
-            
+            <Toolbar>
                 <AppTitle onClick={() => { if(location.pathname !== '/') navigate('/')}} style = {{cursor :'pointer'}}>MovieVerse</AppTitle>
-                
                 <NavRight>
                 <NavRightContent onClick={() => { if(location.pathname.includes('explore') === false) navigate('/explore')}} style={{cursor:'pointer'}} >Explore</NavRightContent>
                 {
@@ -55,7 +49,7 @@ const Header = () => {
                 
                 <NavRightContent onClick={() => { if(location.pathname.includes('search') === false) navigate('/search?query=')}} style = {{cursor :'pointer'}}>Search</NavRightContent>
                 </NavRight>
-            
+            </Toolbar>
         </HeaderBox>
     )
 }

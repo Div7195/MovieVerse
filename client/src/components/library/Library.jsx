@@ -38,9 +38,11 @@ const ListItem = styled(Link)`
 `
 const MainContenBox = styled(Box)`
     margin-left:290px;
-    
     position:absolute;
     top:70px;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
     `
 
 const Library = () => {
@@ -203,22 +205,20 @@ const Library = () => {
         </SideBarContainer>
     
     <MainContenBox>
-    <Grid container>
-    <Grid container item lg={12} sm={12} xs={12}>
+    
         {
             
             movies && movies.length > 0 ? movies.map(movie => (
-                <Grid item lg={2} sm={3} xs={12}>
+                
                     <Link to={`/movie/${movie.id}`} style={{textDecoration:'none' , color:'inherit'}}>
                         <MovieItem  movie = {movie}/>
                  </Link>
-                </Grid>
+                
             ))
             :
             console.log('no data to show')
         }
-        </Grid>
-        </Grid>
+        
     </MainContenBox>
         </>
     )
