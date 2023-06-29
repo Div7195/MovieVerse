@@ -38,7 +38,7 @@ const ListItem = styled(Link)`
 `
 const MainContenBox = styled(Box)`
     margin-left:290px;
-    display:inline-block;
+    
     position:absolute;
     top:70px;
     `
@@ -201,13 +201,10 @@ const Library = () => {
         <ListItem to = {`/`} onClick={()=>handleLogout()}>Logout</ListItem>
         </Box>
         </SideBarContainer>
-        <MainContenBox>
-        
+    
+    <MainContenBox>
     <Grid container>
     <Grid container item lg={12} sm={12} xs={12}>
-        {
-            console.log(movies)
-        }
         {
             
             movies && movies.length > 0 ? movies.map(movie => (

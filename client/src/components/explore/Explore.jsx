@@ -35,11 +35,12 @@ const ListItem = styled(Link)`
     font-family: 'Roboto Condensed', sans-serif;
 `
 const MainContenBox = styled(Box)`
-    margin-left:290px;
-    display:inline-block;
     position:absolute;
     top:70px;
-    
+    left:290px;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
 `
 
 const url = 'https://api.themoviedb.org/3/genre/movie/list?language=en';
@@ -130,24 +131,14 @@ const Explore = () => {
         </Box>
     </SideBarContainer>
     <MainContenBox>
-        <Typography style={{fontSize:'25px', color:'#000', fontFamily: `'Roboto Condensed', sans-serif`}}>{
-            genre && genre.length > 0? genre : type
-        }</Typography>
-    <Grid container>
-    <Grid container item lg={12} sm={12} xs={12}>
         {
             movies && movies.length > 0 ? movies.map(movie => (
-                <Grid item lg={2} sm={3} xs={12}>
-                    
                         <MovieItem  movie = {movie}/>
-                 
-                </Grid>
             ))
             :
             console.log('no data to show')
         }
-        </Grid>
-        </Grid>
+       
     </MainContenBox>
 
 </>

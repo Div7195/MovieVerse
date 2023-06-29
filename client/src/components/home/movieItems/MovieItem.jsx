@@ -63,7 +63,7 @@ const MovieItem = ({movie}) => {
 
   return (
     <>
-    <Box style={{ position: 'relative', width: 150, marginLeft:'20px'}} >
+    <Box style={{ position: 'relative', width: '150px', marginLeft:'20px'}} >
        <Link to={`/movie/${movie.id}`} style={{textDecoration:'none' , color:'inherit'}}>
           <img src={movie.imageSrc}alt="Movie Poster" style={{ height: '225px', width: '150px', borderRadius:'10px', cursor :'pointer' }} />
         </Link>

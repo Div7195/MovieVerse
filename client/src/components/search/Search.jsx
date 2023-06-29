@@ -47,11 +47,12 @@ const SearchButton = styled('input')({
     color: "#fff"
 })
 const MainContenBox = styled(Box)`
-    margin-top:100px;
-    margin-left:70px;
-    display:inline-block;
     position:absolute;
-    top:70px;
+    top:170px;
+    left:70px;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
     
 `
 
@@ -111,21 +112,19 @@ const Search = () => {
         </SearchParent>
         <MainContenBox>
         
-    <Grid container>
-    <Grid container item lg={12} sm={12} xs={12}>
+    
         {
             movies && movies.length > 0 ? movies.map(movie => (
-                <Grid item lg={2} sm={3} xs={12}>
+
                     <Link to={`/movie/${movie.id}`} style={{textDecoration:'none' , color:'inherit'}}>
                         <MovieItem  movie = {movie}/>
                  </Link>
-                </Grid>
+                
             ))
             :
             console.log('no data to show')
         }
-        </Grid>
-        </Grid>
+       
     </MainContenBox>
         </>
     )
