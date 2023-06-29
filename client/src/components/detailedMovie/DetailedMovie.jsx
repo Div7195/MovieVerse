@@ -2,14 +2,14 @@ import { useNavigate, useParams, Link } from 'react-router-dom'
 import { styled } from '@mui/material'
 import { useState } from 'react';
 import {Box, Typography} from '@mui/material'
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CastList from './castItems/CastList';
 import ReviewItems from './reviewItems/ReviewItems';
 import VideosList from './videoList/VideosList';
-
-
+import { DataContext } from '../../context/DataProvider';
+import { API } from '../../service/api';
 const BigContainer = styled(Box)`
     padding-top: 30px;
     padding-bottom:30px;
@@ -76,13 +76,55 @@ const intialBanneerObj = {
     genres:[],
     
 }
+const favColor  = {
+    color : '#fff',
+}
 let bannerObj ={};
 let crew = [];
 let genreString = '';
 let directorString = '';
 const DetailedMovie = () => {
+    const navigate  = useNavigate();
+    const [favIconColor, setFavIconColor] = useState('#fff');
+    const [watchIconColor, setWatchIconColor] = useState('#fff');
+    const {setAccount} = useContext(DataContext);
+    const {account}=useContext(DataContext);
     const {id} = useParams();
     const [bannerDetails, setBannerDetails] = useState(intialBanneerObj);
+    const obj = {
+        userId:account.id,
+        movieId:id
+      }
+    const handleAddWatch = async(e) => {
+        if(account.loggedIn === true){
+            let response  = await API.addWatchLater(obj);
+            
+            if(response.isSuccess){
+            console.log('Added to watchlater')
+            setWatchIconColor('rgb(176, 5, 238)')
+            }else{
+            console.log('cant add to watch later')
+            }
+        }
+        else{
+            navigate('/login')
+        }
+    }
+
+    const handleAddFav = async(e) => {
+        if(account.loggedIn === true){
+        let response  = await API.markFavorite(obj);
+        if(response.isSuccess){
+        console.log('Added to favorite')
+        setFavIconColor('rgb(176, 5, 238)')
+        }else{
+        console.log('cant add to favorite')
+        }
+    }
+    else{
+        navigate('/login')
+    }
+}
     useEffect(() => {
         const urlMovie = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
         const optionsMovie = {
@@ -191,8 +233,8 @@ const DetailedMovie = () => {
                         <Typography style={{color: 'rgb(0 255 135)',fontSize:'1.5em',}}>{bannerDetails.vote_average}</Typography>
                         
                     </Box>
-                    <FavoriteIcon style={{fontSize:'16', color:'#fff', background:'rgba(3,37,65,1)', borderRadius:'24px', padding:'18' ,marginRight:'20px', cursor:'pointer'}}/>
-                    <BookmarkIcon style={{fontSize:'16', color:'#fff', background:'rgba(3,37,65,1)', borderRadius:'24px', padding:'18',marginRight:'20px', cursor:'pointer'}}/>
+                    <FavoriteIcon style={{fontSize:'16', color:`${favIconColor}`, background:'rgba(3,37,65,1)', borderRadius:'24px', padding:'18' ,marginRight:'20px', cursor:'pointer'}} onClick = {(e) => handleAddFav(e)}/>
+                    <BookmarkIcon style={{fontSize:'16', color:`${watchIconColor}`, background:'rgba(3,37,65,1)', borderRadius:'24px', padding:'18',marginRight:'20px', cursor:'pointer'}} onClick = {(e) => handleAddWatch(e)}/>
             </RatingAndAddBox>
             
             <OverviewBox>
