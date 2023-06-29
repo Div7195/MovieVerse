@@ -116,10 +116,7 @@ const Search = () => {
         {
             movies && movies.length > 0 ? movies.map(movie => (
 
-                    <Link to={`/movie/${movie.id}`} style={{textDecoration:'none' , color:'inherit'}}>
                         <MovieItem  movie = {movie}/>
-                 </Link>
-                
             ))
             :
             console.log('no data to show')
