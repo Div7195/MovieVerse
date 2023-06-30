@@ -1,5 +1,5 @@
 # MovieVerse
- A web app through which user can see details of various movies. Frontend inspired from TMDB website
+ A web app through which user can see details of various movies. Frontend inspiration from TMDB website
 
 ## Main features:
 - Sort movies by popularity, top rated, upcoming etc.
