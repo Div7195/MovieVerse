@@ -1,7 +1,7 @@
 # MovieVerse
  A web app through which user can see details of various movies. Frontend inspiration from TMDB website
 
-## Main features:
+### Main features:
 - Sort movies by popularity, top rated, upcoming etc.
 - Sort movies by genre
 - See detailed description about any movie including cast, videos, trailers, reviews, etc.
@@ -10,5 +10,9 @@
 - Add to watchlist
 - Mark any movie as favorite
 
-The web app is made with ReactJS, Material UI package, MongoDB Atlas as database, and NodeJS Express as server.
-The app utilises the TMDB API for fetching all kinds of details related to movies.
+### Tech used
+- ReactJS
+- Material UI package
+- MongoDB Atlas as database
+- NodeJS Express for server
+- TMDB API for fetching all kinds of details related to movies
