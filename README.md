@@ -15,4 +15,5 @@
 - Material UI package
 - MongoDB Atlas as database
 - NodeJS Express for server
+- Axios library
 - TMDB API for fetching all kinds of details related to movies
